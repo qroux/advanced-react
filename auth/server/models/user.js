@@ -25,13 +25,10 @@ userSchema.pre('save', function (next) {
   //generate salt then run callback
   bcrypt.genSalt(10, (err, salt) => {
     if (err) return next(err);
-    console.log('salt =', salt);
 
     //hash the password using the salt
     bcrypt.hash(user.password, salt, (err, hash) => {
-      console.log('ici 3');
       if (err) return next(err);
-      console.log('ici');
 
       //overwrite plaintext password
       user.password = hash;
