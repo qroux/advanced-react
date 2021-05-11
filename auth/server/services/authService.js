@@ -1,7 +1,9 @@
 import { User } from '../models/user.js';
+import jwt from 'jsonwebtoken';
+import { config } from '../config/config.js';
 
-class AuthenticationService {
-  async signup(req, res, next) {
+class AuthService {
+  signup(req, res, next) {
     const { email, password } = req.body;
 
     if (!email || !password)
@@ -19,7 +21,9 @@ class AuthenticationService {
       const newUser = new User({ email, password });
       newUser.save((err) => {
         if (err) next(err);
-        res.send({ user: newUser.id });
+
+        const token = jwt.sign({ sub: newUser.id }, config.secret);
+        res.send({ token });
       });
     });
   }
@@ -29,8 +33,10 @@ class AuthenticationService {
   }
 
   currentUser(req, res, next) {
-    res.send({ userId: '12345' });
+    console.log('SECRET =', config.secret);
+    const token = jwt.sign('test@test.com', config.secret);
+    res.send(token);
   }
 }
 
-export const AuthService = new AuthenticationService();
+export const authService = new AuthService();
