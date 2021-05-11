@@ -9,10 +9,10 @@ class AuthService {
     if (!email || !password)
       return res.status(422).send({ error: 'Missing email or password' });
 
-    User.findOne({ email }, (err, existingUser) => {
+    User.findOne({ email }, (err, user) => {
       if (err) next(err);
 
-      if (existingUser) {
+      if (user) {
         return res
           .status(422)
           .send({ error: 'User already exists for that email' });
@@ -29,11 +29,11 @@ class AuthService {
   }
 
   login(req, res, next) {
-    res.send({ loggedIn: 'true' });
+    const token = jwt.sign({ sub: req.user.id }, config.secret);
+    res.send({ token });
   }
 
   currentUser(req, res, next) {
-    console.log('SECRET =', config.secret);
     const token = jwt.sign('test@test.com', config.secret);
     res.send(token);
   }
