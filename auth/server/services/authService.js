@@ -34,7 +34,10 @@ class AuthService {
   }
 
   currentUser(req, res, next) {
-    const token = jwt.sign('test@test.com', config.secret);
+    const token = jwt.sign(
+      { sub: req.user.id, email: req.user.email },
+      config.secret
+    );
     res.send(token);
   }
 }
