@@ -7,10 +7,14 @@ import reportWebVitals from './reportWebVitals';
 // REDUX
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
 
-const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+const store = createStore(
+  reducers,
+  composeWithDevTools(applyMiddleware(reduxThunk))
+);
 
 ReactDOM.render(
   // <React.StrictMode>
