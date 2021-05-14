@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Field } from 'redux-form';
 import { formType } from '../helpers/formHelper';
+import './Form.scss';
 
 export const Form = ({ type, action }) => {
   const [email, setEmail] = useState('');
@@ -22,7 +23,7 @@ export const Form = ({ type, action }) => {
   return (
     <div>
       <form onSubmit={onSubmitHandler}>
-        <fieldset>
+        <div className='input-container'>
           <label>email</label>
           <Field
             name='email'
@@ -31,8 +32,8 @@ export const Form = ({ type, action }) => {
             onChange={onEmailChange}
             value={email}
           />
-        </fieldset>
-        <fieldset>
+        </div>
+        <div className='input-container'>
           <label>password</label>
           <Field
             name='password'
@@ -41,7 +42,8 @@ export const Form = ({ type, action }) => {
             onChange={onPasswordChange}
             value={password}
           />
-        </fieldset>
+        </div>
+
         <button type='submit'>
           {type === formType.SIGNUP ? 'Register' : 'Login'}
         </button>
