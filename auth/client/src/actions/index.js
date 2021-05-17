@@ -28,6 +28,20 @@ export const signup = (formProps, callback) => async (dispatch) => {
   }
 };
 
+export const signout = (callback) => async (dispatch) => {
+  try {
+    Cookies.remove('AUTH_JWT_TOKEN');
+    dispatch({ type: actionTypes.AUTH_USER, payload: '' });
+    callback();
+  } catch (err) {
+    dispatch({
+      type: actionTypes.AUTH_ERROR_MSG,
+      payload: err.response.data.error,
+    });
+  }
+};
+
+// UTILS
 export const fetchToken = () => async (dispatch) => {
   try {
     const token = Cookies.get('AUTH_JWT_TOKEN');
