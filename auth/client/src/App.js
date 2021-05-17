@@ -1,6 +1,5 @@
 import './App.scss';
-import { Router, Switch, Route } from 'react-router-dom';
-import history from './helpers/history';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Page } from './components/Page';
 import { Home } from './pages/Home';
@@ -24,7 +23,7 @@ function App() {
     );
   });
   return (
-    <Router history={history}>
+    <Router>
       <div className='App'>
         <Header />
         <Switch>{renderRoutes}</Switch>

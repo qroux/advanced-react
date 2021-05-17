@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Field } from 'redux-form';
 import { formType } from '../helpers/formHelper';
 import './Form.scss';
@@ -6,10 +7,13 @@ import './Form.scss';
 export const Form = ({ type, action }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    action({ email, password });
+    action({ email, password }, () => {
+      history.push('/feature');
+    });
   };
 
   const onEmailChange = (e) => {
