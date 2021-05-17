@@ -1,24 +1,36 @@
-import './App.scss';
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import * as actions from './actions';
+
+import './App.scss';
 import { Header } from './components/Header';
-import { Page } from './components/Page';
+import Page from './components/Page';
 import { Home } from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
+import Feature from './pages/Feature';
 
-function App() {
+const App = ({ fetchToken }) => {
+  useEffect(() => {
+    console.log('fetch token called');
+    fetchToken();
+  }, []);
+
   const routes = [
-    { path: '/', view: <Home /> },
-    { path: '/signup', view: <SignUp /> },
-    { path: '/login', view: <Login /> },
-    // { path: '/signout', view: 'Disconnect' },
-    // { path: '/feature', view: 'Feature' },
+    { path: '/', view: <Home />, requireAuth: false },
+    { path: '/signup', view: <SignUp />, requireAuth: false },
+    { path: '/login', view: <Login />, requireAuth: false },
+    // { path: '/signout', view: 'Disconnect', requireAuth: true  },
+    { path: '/feature', view: <Feature /> },
   ];
 
   const renderRoutes = routes.map((route) => {
     return (
       <Route exact path={route.path} key={route.path}>
-        <Page children={route.view} />
+        <Page children={route.view} requireAuth={route.requireAuth} />
       </Route>
     );
   });
@@ -30,6 +42,10 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
-export default App;
+const mapStateToProps = (state) => {
+  return { auth: state.auth.authenticated };
+};
+
+export default compose(connect(mapStateToProps, actions))(App);
