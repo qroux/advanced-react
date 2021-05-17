@@ -17,7 +17,7 @@ import Feature from './pages/Feature';
 const App = ({ fetchToken }) => {
   useEffect(() => {
     fetchToken();
-  });
+  }, []);
 
   const routes = [
     { path: '/', view: <Home />, requireAuth: false },
