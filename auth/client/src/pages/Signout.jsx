@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import * as actions from '../actions';
@@ -6,17 +7,16 @@ import { useHistory } from 'react-router-dom';
 const SignOut = ({ errorMessage, signout }) => {
   const history = useHistory();
 
-  const handleClick = () => {
+  useEffect(() => {
     signout(() => {
       history.push('/');
     });
-  };
+  }, []);
 
   return (
     <div>
       <h3>SignOUT Page</h3>
       {errorMessage ? <p>{errorMessage}</p> : null}
-      <button onClick={handleClick}>Disconnect</button>
     </div>
   );
 };
