@@ -28,7 +28,7 @@ class AuthService {
     });
   }
 
-  login(req, res, next) {
+  login(req, res) {
     const token = jwt.sign({ sub: req.user.id }, config.secret);
     res.send({ token });
   }

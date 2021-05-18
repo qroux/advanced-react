@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { connect } from 'react-redux';
@@ -9,10 +9,12 @@ import './App.scss';
 import { Header } from './components/Header';
 import Page from './components/Page';
 import { Home } from './pages/Home';
-import Login from './pages/Login';
-import SignUp from './pages/SignUp';
-import SignOut from './pages/Signout';
-import Feature from './pages/Feature';
+import { Loading } from './pages/Loading';
+
+const Login = lazy(() => import('./pages/Login'));
+const SignUp = lazy(() => import('./pages/SignUp'));
+const SignOut = lazy(() => import('./pages/Signout'));
+const Feature = lazy(() => import('./pages/Feature'));
 
 const App = ({ fetchToken, auth }) => {
   useEffect(() => {
@@ -36,10 +38,12 @@ const App = ({ fetchToken, auth }) => {
   });
   return (
     <Router>
-      <div className='App'>
-        <Header token={auth} />
-        <Switch>{renderRoutes}</Switch>
-      </div>
+      <Suspense fallback={<Loading />}>
+        <div className='App'>
+          <Header token={auth} />
+          <Switch>{renderRoutes}</Switch>
+        </div>
+      </Suspense>
     </Router>
   );
 };

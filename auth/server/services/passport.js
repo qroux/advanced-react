@@ -10,8 +10,8 @@ const { Strategy, ExtractJwt } = passportJwt;
 const localOptions = { usernameField: 'email' };
 const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
   User.findOne({ email }, (err, user) => {
-    if (err) done(err, false);
-    if (!user) done(null, false);
+    if (err) return done(err, false);
+    if (!user) return done(null, false);
 
     //compare passwords
     user.comparePassword(password, (err, isMatch) => {
