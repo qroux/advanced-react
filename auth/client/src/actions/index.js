@@ -28,6 +28,23 @@ export const signup = (formProps, callback) => async (dispatch) => {
   }
 };
 
+export const login = (formProps, callback) => async (dispatch) => {
+  try {
+    const response = await axios.post('http://localhost:3090/login', formProps);
+    dispatch({ type: actionTypes.AUTH_USER, payload: response.data.token });
+    Cookies.set('AUTH_JWT_TOKEN', response.data.token, {
+      expires: genExpiration(),
+      sameSite: 'strict',
+    });
+    callback();
+  } catch (err) {
+    dispatch({
+      type: actionTypes.AUTH_ERROR_MSG,
+      payload: err.response.data.error,
+    });
+  }
+};
+
 export const signout = (callback) => async (dispatch) => {
   try {
     Cookies.remove('AUTH_JWT_TOKEN');

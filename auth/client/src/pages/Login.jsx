@@ -1,14 +1,25 @@
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import * as actions from '../actions';
+
 import { reduxForm } from 'redux-form';
 import { Form } from '../components/Form';
 import { formType } from '../helpers/formHelper';
 
-const Login = () => {
+const Login = (props) => {
   return (
     <div>
       <h3>Login Page</h3>
-      <Form type={formType.LOGIN} />
+      <Form type={formType.LOGIN} action={props.login} />
     </div>
   );
 };
 
-export default reduxForm({ form: 'login' })(Login);
+const mapStateToProps = (state) => {
+  return { errorMessage: state.auth.errorMessage };
+};
+
+export default compose(
+  connect(mapStateToProps, actions),
+  reduxForm({ form: 'login' })
+)(Login);
