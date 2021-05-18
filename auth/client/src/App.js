@@ -14,7 +14,7 @@ import SignUp from './pages/SignUp';
 import SignOut from './pages/Signout';
 import Feature from './pages/Feature';
 
-const App = ({ fetchToken }) => {
+const App = ({ fetchToken, auth }) => {
   useEffect(() => {
     fetchToken();
   }, []);
@@ -37,7 +37,7 @@ const App = ({ fetchToken }) => {
   return (
     <Router>
       <div className='App'>
-        <Header />
+        <Header token={auth} />
         <Switch>{renderRoutes}</Switch>
       </div>
     </Router>
