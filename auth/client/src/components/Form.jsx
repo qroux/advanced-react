@@ -26,7 +26,7 @@ export const Form = ({ type, action }) => {
 
   return (
     <div>
-      <form onSubmit={onSubmitHandler}>
+      <form onSubmit={onSubmitHandler} name='auth-form'>
         <div className='input-container'>
           <label>email</label>
           <Field
