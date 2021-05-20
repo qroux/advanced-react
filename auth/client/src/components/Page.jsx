@@ -2,18 +2,25 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import * as actions from '../actions';
 
-import './Page.scss';
+import styled from 'styled-components';
 import './Error.scss';
 import Error from './Error';
 import { grantAccess } from '../helpers/grantAccess';
 
+const Container = styled.div({
+  opacity: 0.7,
+  '&:hover': {
+    opacity: 1,
+  },
+});
+
 const Page = ({ children, requireAuth, auth }) => {
   return grantAccess(requireAuth, auth) ? (
-    <div className='page__container'>{children}</div>
+    <Container>{children}</Container>
   ) : (
-    <div className='page__container'>
+    <Container>
       <Error message='Auth required to access this page' />
-    </div>
+    </Container>
   );
 };
 
