@@ -11,10 +11,15 @@ import Page from './components/Page';
 import { Home } from './pages/Home';
 import { Loading } from './pages/Loading';
 
-const Login = lazy(() => import('./pages/Login'));
-const SignUp = lazy(() => import('./pages/SignUp'));
-const SignOut = lazy(() => import('./pages/Signout'));
-const Feature = lazy(() => import('./pages/Feature'));
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import SignOut from './pages/Signout';
+import Feature from './pages/Feature';
+
+// const Login = lazy(() => import('./pages/Login'));
+// const SignUp = lazy(() => import('./pages/SignUp'));
+// const SignOut = lazy(() => import('./pages/Signout'));
+// const Feature = lazy(() => import('./pages/Feature'));
 
 const AppContainer = styled.div({
   display: 'flex',

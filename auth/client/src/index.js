@@ -16,32 +16,10 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle({
   body: {
     margin: 0,
-    padding: 15,
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      'Segoe UI',
-      'Roboto',
-      'Oxygen',
-      'Ubuntu',
-      'Cantarell',
-      'Fira Sans',
-      'Droid Sans',
-      'Helvetica Neue',
-      'sans-serif',
-    ],
+    padding: 0,
+    fontFamily: ['Roboto', 'sans-serif'],
     '-webkitFont-smoothing': 'antialiased',
     '-moz-osx-font-smoothing': 'grayscale',
-
-    a: {
-      color: 'black',
-      textDecoration: 'none',
-      border: '1px solid grey',
-    },
-
-    'a:hover': {
-      opacity: 0.8,
-    },
   },
 
   code: {

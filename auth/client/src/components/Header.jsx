@@ -1,17 +1,23 @@
 import { Link } from 'react-router-dom';
+import UiLink from '@material-ui/core/Link';
 import styled from 'styled-components';
-import './Header.scss';
+import Button from '@material-ui/core/Button';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Tabs,
+  Tab,
+} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 
-const HeaderContainer = styled.div({
-  width: '100%',
-  display: 'flex',
-  justifyContent: 'flex-start',
-  alignItems: 'center',
-});
-
-const Button = styled.div({
-  padding: '10px 15px',
-});
+// const HeaderContainer = styled.div({
+//   width: '100%',
+//   display: 'flex',
+//   justifyContent: 'flex-start',
+//   alignItems: 'center',
+// });
 
 export const Header = ({ token }) => {
   const buttons = [
@@ -29,12 +35,22 @@ export const Header = ({ token }) => {
 
     return toRender.map((btn) => {
       return (
-        <Link to={btn.path} key={btn.path} className='linko'>
-          <Button>{btn.label}</Button>
-        </Link>
+        <Tab
+          to={btn.path}
+          key={btn.path}
+          label={btn.label}
+          component={Link}
+          to={btn.path}
+        />
       );
     });
   };
 
-  return <HeaderContainer>{renderButtons()}</HeaderContainer>;
+  return (
+    <AppBar position='static'>
+      <Toolbar>
+        <Tabs>{renderButtons()}</Tabs>
+      </Toolbar>
+    </AppBar>
+  );
 };
