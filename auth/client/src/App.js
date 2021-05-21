@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import * as actions from './actions';
 
-import './App.scss';
+import styled from 'styled-components';
 import { Header } from './components/Header';
 import Page from './components/Page';
 import { Home } from './pages/Home';
@@ -15,6 +15,13 @@ const Login = lazy(() => import('./pages/Login'));
 const SignUp = lazy(() => import('./pages/SignUp'));
 const SignOut = lazy(() => import('./pages/Signout'));
 const Feature = lazy(() => import('./pages/Feature'));
+
+const AppContainer = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'flex-start',
+});
 
 const App = ({ fetchToken, auth }) => {
   useEffect(() => {
@@ -39,10 +46,10 @@ const App = ({ fetchToken, auth }) => {
   return (
     <Router>
       <Suspense fallback={<Loading />}>
-        <div className='App'>
+        <AppContainer>
           <Header token={auth} />
           <Switch>{renderRoutes}</Switch>
-        </div>
+        </AppContainer>
       </Suspense>
     </Router>
   );

@@ -1,5 +1,17 @@
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import './Header.scss';
+
+const HeaderContainer = styled.div({
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+});
+
+const Button = styled.div({
+  padding: '10px 15px',
+});
 
 export const Header = ({ token }) => {
   const buttons = [
@@ -17,12 +29,12 @@ export const Header = ({ token }) => {
 
     return toRender.map((btn) => {
       return (
-        <Link to={btn.path} key={btn.path}>
-          <div className='header__button'>{btn.label}</div>
+        <Link to={btn.path} key={btn.path} className='linko'>
+          <Button>{btn.label}</Button>
         </Link>
       );
     });
   };
 
-  return <div className='header'>{renderButtons()}</div>;
+  return <HeaderContainer>{renderButtons()}</HeaderContainer>;
 };

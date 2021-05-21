@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -11,6 +10,52 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
 
+// STYLING
+import { createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle({
+  body: {
+    margin: 0,
+    padding: 15,
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      'Segoe UI',
+      'Roboto',
+      'Oxygen',
+      'Ubuntu',
+      'Cantarell',
+      'Fira Sans',
+      'Droid Sans',
+      'Helvetica Neue',
+      'sans-serif',
+    ],
+    '-webkitFont-smoothing': 'antialiased',
+    '-moz-osx-font-smoothing': 'grayscale',
+
+    a: {
+      color: 'black',
+      textDecoration: 'none',
+      border: '1px solid grey',
+    },
+
+    'a:hover': {
+      opacity: 0.8,
+    },
+  },
+
+  code: {
+    fontFamily: [
+      'source-code-pro',
+      'Menlo',
+      'Monaco',
+      'Consolas',
+      'Courier New',
+      'monospace',
+    ],
+  },
+});
+
 const store = createStore(
   reducers,
   composeWithDevTools(applyMiddleware(reduxThunk))
@@ -19,6 +64,7 @@ const store = createStore(
 ReactDOM.render(
   // <React.StrictMode>
   <Provider store={store}>
+    <GlobalStyle />
     <App />
   </Provider>,
   // </React.StrictMode>,
