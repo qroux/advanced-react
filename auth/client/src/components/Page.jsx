@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import './Error.scss';
 import Error from './Error';
 import { grantAccess } from '../helpers/grantAccess';
+import { useEffect } from 'react';
 
 const Container = styled.div({
   width: '90%',
@@ -16,7 +17,13 @@ const Container = styled.div({
   },
 });
 
-const Page = ({ children, requireAuth, auth }) => {
+const Page = ({ children, requireAuth, auth, resetError }) => {
+  useEffect(() => {
+    return function cleanup() {
+      resetError();
+    };
+  }, []);
+
   return grantAccess(requireAuth, auth) ? (
     <Container>{children}</Container>
   ) : (

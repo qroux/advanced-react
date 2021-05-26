@@ -10,7 +10,7 @@ const SignUp = (props) => {
   return (
     <div>
       <Typography variant='h4'>SignUp Page</Typography>
-      <Typography variant='p' color='secondary'>
+      <Typography variant='body1' color='secondary'>
         {props.errorMessage ? props.errorMessage : null}
       </Typography>
       <Form action={props.signup} type={formType.SIGNUP} />
