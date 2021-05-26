@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import UiLink from '@material-ui/core/Link';
 import styled from 'styled-components';
@@ -12,6 +13,8 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import { useLocation } from 'react-router-dom';
+
 // const HeaderContainer = styled.div({
 //   width: '100%',
 //   display: 'flex',
@@ -20,6 +23,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 // });
 
 export const Header = ({ token }) => {
+  const location = useLocation();
+
   const buttons = [
     { path: '/', label: 'Homepage', requireAuth: false, alwaysRender: true },
     { path: '/login', label: 'Login', requireAuth: false },
@@ -36,6 +41,7 @@ export const Header = ({ token }) => {
     return toRender.map((btn) => {
       return (
         <Tab
+          value={btn.path}
           to={btn.path}
           key={btn.path}
           label={btn.label}
@@ -49,7 +55,7 @@ export const Header = ({ token }) => {
   return (
     <AppBar position='static'>
       <Toolbar>
-        <Tabs>{renderButtons()}</Tabs>
+        <Tabs value={location.pathname}>{renderButtons()}</Tabs>
       </Toolbar>
     </AppBar>
   );
