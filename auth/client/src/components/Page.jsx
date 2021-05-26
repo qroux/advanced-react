@@ -15,12 +15,12 @@ const Container = styled.div({
     opacity: 1,
   },
   '@media (min-width: 300px)': {
-    padding: '2vw 0',
+    padding: '10vh 2vh',
     display: 'flex',
     justifyContent: 'center',
   },
   '@media (min-width: 1024px)': {
-    padding: '2vw',
+    padding: '5vh',
     display: 'flex',
     justifyContent: 'flex-start',
   },
