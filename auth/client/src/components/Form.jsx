@@ -2,10 +2,8 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Field } from 'redux-form';
 import { formType } from '../helpers/formHelper';
-// import './Form.scss';
 
-import { makeStyles } from '@material-ui/core/styles';
-import { TextField, FormGroup, Button } from '@material-ui/core';
+import { TextField, Button, FormControl, Icon } from '@material-ui/core';
 
 export const Form = ({ type, action }) => {
   const [email, setEmail] = useState('');
@@ -29,67 +27,44 @@ export const Form = ({ type, action }) => {
 
   return (
     <div>
-      <FormGroup
+      <form
         noValidate
         autoComplete='off'
         onSubmit={onSubmitHandler}
         name='auth-form'>
-        <TextField
-          id='outlined-basic'
-          label='Email'
-          variant='outlined'
-          size='small'>
-          <Field
-            name='email'
-            type='text'
-            component='input'
-            onChange={onEmailChange}
-            value={email}
-          />
-        </TextField>
-        <TextField
-          id='outlined-basic'
-          label='Password'
-          variant='outlined'
-          size='small'>
-          <Field
-            name='password'
-            type='password'
-            component='input'
-            onChange={onPasswordChange}
-            value={password}
-          />
-        </TextField>
-        <Button type='submit'>
-          {type === formType.SIGNUP ? 'Register' : 'Login'}
-        </Button>
-      </FormGroup>
-      {/* <form onSubmit={onSubmitHandler} name='auth-form'>
-        <div className='input-container'>
-          <label>email</label>
-          <Field
-            name='email'
-            type='text'
-            component='input'
-            onChange={onEmailChange}
-            value={email}
-          />
-        </div>
-        <div className='input-container'>
-          <label>password</label>
-          <Field
-            name='password'
-            type='password'
-            component='input'
-            onChange={onPasswordChange}
-            value={password}
-          />
-        </div>
-
-        <button type='submit'>
-          {type === formType.SIGNUP ? 'Register' : 'Login'}
-        </button>
-      </form> */}
+        <FormControl style={{ width: '20%', minWidth: 250 }}>
+          <TextField id='email-input' label='Email' size='small' margin='dense'>
+            <Field
+              name='email'
+              type='text'
+              component='input'
+              onChange={onEmailChange}
+              value={email}
+            />
+          </TextField>
+          <TextField
+            id='password-input'
+            label='Password'
+            size='small'
+            margin='dense'>
+            <Field
+              name='password'
+              type='password'
+              component='input'
+              onChange={onPasswordChange}
+              value={password}
+            />
+          </TextField>
+          <Button
+            type='submit'
+            variant='contained'
+            color='secondary'
+            style={{ marginTop: '1rem' }}
+            startIcon={<Icon>send</Icon>}>
+            {type === formType.SIGNUP ? 'Register' : 'Login'}
+          </Button>
+        </FormControl>
+      </form>
     </div>
   );
 };

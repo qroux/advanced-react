@@ -8,7 +8,8 @@ import Error from './Error';
 import { grantAccess } from '../helpers/grantAccess';
 
 const Container = styled.div({
-  padding: '0 1vw ',
+  width: '90%',
+  padding: '2vw',
   opacity: 0.7,
   '&:hover': {
     opacity: 1,

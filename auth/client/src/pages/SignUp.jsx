@@ -4,12 +4,15 @@ import { compose } from 'redux';
 import { Form } from '../components/Form';
 import { formType } from '../helpers/formHelper';
 import * as actions from '../actions';
+import { Typography } from '@material-ui/core';
 
 const SignUp = (props) => {
   return (
     <div>
-      <h3>SignUp Page</h3>
-      {props.errorMessage ? <p>{props.errorMessage}</p> : null}
+      <Typography variant='h4'>SignUp Page</Typography>
+      <Typography variant='p' color='secondary'>
+        {props.errorMessage ? props.errorMessage : null}
+      </Typography>
       <Form action={props.signup} type={formType.SIGNUP} />
     </div>
   );

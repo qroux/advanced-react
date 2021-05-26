@@ -70,3 +70,16 @@ export const fetchToken = () => async (dispatch) => {
     });
   }
 };
+
+export const resetError = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: actionTypes.RESET_ERROR,
+    });
+  } catch (err) {
+    dispatch({
+      type: actionTypes.AUTH_ERROR_MSG,
+      payload: err,
+    });
+  }
+};

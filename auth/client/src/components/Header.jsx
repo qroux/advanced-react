@@ -54,7 +54,7 @@ export const Header = ({ token }) => {
 
   return (
     <AppBar position='static'>
-      <Toolbar>
+      <Toolbar variant='dense'>
         <Tabs value={location.pathname}>{renderButtons()}</Tabs>
       </Toolbar>
     </AppBar>

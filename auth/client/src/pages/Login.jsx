@@ -5,12 +5,22 @@ import * as actions from '../actions';
 import { reduxForm } from 'redux-form';
 import { Form } from '../components/Form';
 import { formType } from '../helpers/formHelper';
+import { Typography } from '@material-ui/core';
+import { useEffect } from 'react';
 
 const Login = (props) => {
+  useEffect(() => {
+    return function cleanup() {
+      props.resetError();
+    };
+  }, []);
+
   return (
     <div>
-      <h3>Login Page</h3>
-      {props.errorMessage ? <p>{props.errorMessage}</p> : null}
+      <Typography variant='h4'>Login Page</Typography>
+      <Typography variant='p' color='secondary'>
+        {props.errorMessage ? props.errorMessage : null}
+      </Typography>
       <Form type={formType.LOGIN} action={props.login} />
     </div>
   );
