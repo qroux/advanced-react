@@ -33,28 +33,26 @@ export const Form = ({ type, action }) => {
         onSubmit={onSubmitHandler}
         name='auth-form'>
         <FormControl style={{ width: '20%', minWidth: 250 }}>
-          <TextField id='email-input' label='Email' size='small' margin='dense'>
-            <Field
-              name='email'
-              type='text'
-              component='input'
-              onChange={onEmailChange}
-              value={email}
-            />
-          </TextField>
+          <TextField
+            id='email-input'
+            label='Email'
+            size='small'
+            margin='dense'
+            name='email'
+            type='text'
+            onChange={onEmailChange}
+            value={email}
+          />
           <TextField
             id='password-input'
             label='Password'
             size='small'
-            margin='dense'>
-            <Field
-              name='password'
-              type='password'
-              component='input'
-              onChange={onPasswordChange}
-              value={password}
-            />
-          </TextField>
+            margin='dense'
+            type='password'
+            onChange={onPasswordChange}
+            value={password}
+          />
+
           <Button
             type='submit'
             variant='contained'
