@@ -9,17 +9,18 @@ import { useHistory } from 'react-router-dom';
 
 const Container = styled.div({
   width: '100%',
+  boxSizing: 'border-box',
   opacity: 0.7,
   '&:hover': {
     opacity: 1,
   },
   '@media (min-width: 300px)': {
-    padding: '10vh 2vh',
+    padding: '10vh 0',
     display: 'flex',
     justifyContent: 'center',
   },
   '@media (min-width: 1024px)': {
-    padding: '5vh',
+    padding: '10vh',
     display: 'flex',
     justifyContent: 'flex-start',
   },
@@ -37,7 +38,7 @@ const Page = ({ children, requireAuth, auth, resetError }) => {
     history.push('/');
   }
 
-  return <Container>{children}</Container>;
+  return <Container id='page-container'>{children}</Container>;
 };
 
 Page.defaultProps = {
