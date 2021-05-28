@@ -16,13 +16,23 @@ describe('Render pages', () => {
     cy.get('h4').should('exist');
   });
 
-  it('renders the error message on /feature when not authenticated', () => {
+  it('redirect to homepage when not authenticated', () => {
     cy.visit('/feature');
-    cy.get('h3').should('exist');
+    cy.location().should((path) => {
+      expect(path.href).to.eql('http://localhost:3000/');
+    });
   });
 });
 
 describe('Signup form', () => {
+  let email = '';
+  const password = 'azerty123';
+
+  before(() => {
+    const rand = Math.floor(Math.random() * 100) + 1;
+    email = `test@test${rand}.com`;
+  });
+
   it('render error message when credential missing on SignupForm', () => {
     cy.visit('/signup');
     cy.get('form').submit();
@@ -32,9 +42,27 @@ describe('Signup form', () => {
   it('render create user when correct credentials on SignupForm', () => {
     cy.visit('/signup');
     cy.get('#email-input').should('exist');
-    const rand = Math.floor(Math.random() * 100) + 1;
-    cy.get('#email-input').type(`test@test${rand}.com`);
-    cy.get('#password-input').type('azerty123');
+    cy.get('#email-input').type(email);
+    cy.get('#password-input').type(password);
+    cy.get('form').submit();
+
+    cy.location().should((path) => {
+      expect(path.href).to.eql('http://localhost:3000/feature');
+    });
+  });
+
+  it('Disconnect user and redirect to Homepage', () => {
+    cy.visit('/signout');
+    cy.location().should((path) => {
+      expect(path.href).to.eql('http://localhost:3000/');
+    });
+  });
+
+  it('Login user with credentials and redirect to /feature', () => {
+    cy.visit('/login');
+    cy.get('#email-input').should('exist');
+    cy.get('#email-input').type(email);
+    cy.get('#password-input').type(password);
     cy.get('form').submit();
 
     cy.location().should((path) => {

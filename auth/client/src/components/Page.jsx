@@ -3,10 +3,9 @@ import { compose } from 'redux';
 import * as actions from '../actions';
 
 import styled from 'styled-components';
-import './Error.scss';
-import Error from './Error';
 import { grantAccess } from '../helpers/grantAccess';
 import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const Container = styled.div({
   width: '100%',
@@ -27,19 +26,18 @@ const Container = styled.div({
 });
 
 const Page = ({ children, requireAuth, auth, resetError }) => {
+  const history = useHistory();
   useEffect(() => {
     return function cleanup() {
       resetError();
     };
   }, []);
 
-  return grantAccess(requireAuth, auth) ? (
-    <Container>{children}</Container>
-  ) : (
-    <Container>
-      <Error message='Auth required to access this page' />
-    </Container>
-  );
+  if (!grantAccess(requireAuth, auth)) {
+    history.push('/');
+  }
+
+  return <Container>{children}</Container>;
 };
 
 Page.defaultProps = {
