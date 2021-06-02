@@ -1,29 +1,12 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import UiLink from '@material-ui/core/Link';
-import styled from 'styled-components';
-import Button from '@material-ui/core/Button';
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Tabs,
-  Tab,
-} from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import { AppBar, Toolbar, Tabs, Tab, useTheme } from '@material-ui/core';
+import ThemeSwitch from './ThemeSwitch';
 
 import { useLocation } from 'react-router-dom';
 
-// const HeaderContainer = styled.div({
-//   width: '100%',
-//   display: 'flex',
-//   justifyContent: 'flex-start',
-//   alignItems: 'center',
-// });
-
-export const Header = ({ token }) => {
+export const Header = ({ token, darkMode, setDarkMode }) => {
   const location = useLocation();
+  const theme = useTheme();
 
   const buttons = [
     { path: '/', label: 'Homepage', requireAuth: false, alwaysRender: true },
@@ -53,9 +36,12 @@ export const Header = ({ token }) => {
   };
 
   return (
-    <AppBar position='static'>
+    <AppBar
+      position='static'
+      style={{ backgroundColor: theme.palette.primary.main }}>
       <Toolbar variant='dense'>
         <Tabs value={location.pathname}>{renderButtons()}</Tabs>
+        <ThemeSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
       </Toolbar>
     </AppBar>
   );

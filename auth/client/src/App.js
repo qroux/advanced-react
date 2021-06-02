@@ -1,4 +1,4 @@
-import { useEffect, Suspense, lazy } from 'react';
+import { useEffect, Suspense, lazy, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { connect } from 'react-redux';
@@ -10,6 +10,7 @@ import { Header } from './components/Header';
 import Page from './components/Page';
 import { Home } from './pages/Home';
 import { Loading } from './pages/Loading';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
@@ -29,6 +30,20 @@ const AppContainer = styled.div({
 });
 
 const App = ({ fetchToken, auth }) => {
+  const [darkMode, setDarkMode] = useState(false);
+  const palletType = darkMode ? 'dark' : 'light';
+  const darkTheme = createMuiTheme({
+    palette: {
+      type: palletType,
+      primary: {
+        main: palletType ? '#3A1772' : '#D741A7',
+      },
+      secondary: {
+        main: palletType ? '#D741A7' : '#3A1772',
+      },
+    },
+  });
+
   useEffect(() => {
     fetchToken();
   }, []);
@@ -50,12 +65,18 @@ const App = ({ fetchToken, auth }) => {
   });
   return (
     <Router>
-      <Suspense fallback={<Loading />}>
-        <AppContainer>
-          <Header token={auth} />
-          <Switch>{renderRoutes}</Switch>
-        </AppContainer>
-      </Suspense>
+      <ThemeProvider theme={darkTheme}>
+        <Suspense fallback={<Loading />}>
+          <AppContainer>
+            <Header
+              token={auth}
+              darkMode={darkMode}
+              setDarkMode={setDarkMode}
+            />
+            <Switch>{renderRoutes}</Switch>
+          </AppContainer>
+        </Suspense>
+      </ThemeProvider>
     </Router>
   );
 };
