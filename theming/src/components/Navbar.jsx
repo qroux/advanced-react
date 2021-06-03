@@ -10,14 +10,21 @@ const Navbar = ({ darkMode, setDarkMode }) => {
   };
 
   return (
-    <AppBar position='static'>
+    <AppBar position='static' color='default'>
       <Toolbar>
         <Typography variant='h6'>HomePage</Typography>
         <FormGroup style={{ marginLeft: 'auto' }}>
           <FormControlLabel
             labelPlacement='start'
             label='dark mode'
-            control={<Switch checked={darkMode} onChange={handleChange} />}
+            control={
+              <Switch
+                checked={darkMode}
+                onChange={handleChange}
+                color='default'
+                inputProps={{ 'aria-label': 'primary checkbox' }}
+              />
+            }
           />
         </FormGroup>
       </Toolbar>

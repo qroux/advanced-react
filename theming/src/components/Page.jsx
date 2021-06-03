@@ -1,9 +1,6 @@
-import { useTheme } from '@material-ui/core';
-
-const Page = ({ myTheme }) => {
-  // const theme = useTheme();
+const Page = () => {
   return (
-    <div style={{ backgroundColor: myTheme.palette.background.default }}>
+    <div style={{ display: 'flex', flexGrow: 1, padding: '15px' }}>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt velit
         eligendi cupiditate animi praesentium impedit illo eum placeat fugiat
