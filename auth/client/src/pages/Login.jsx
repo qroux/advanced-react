@@ -13,7 +13,7 @@ const Login = (props) => {
       <Typography variant='h4' color='textPrimary'>
         Login Page
       </Typography>
-      <Typography variant='body1' color='textSecondary'>
+      <Typography variant='body1' color='secondary'>
         {props.errorMessage ? props.errorMessage : null}
       </Typography>
       <Form type={formType.LOGIN} action={props.login} />
