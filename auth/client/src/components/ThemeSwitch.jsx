@@ -1,14 +1,12 @@
-import { useTheme, withStyles } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-import { useState } from 'react';
 import { FormGroup } from '@material-ui/core';
 
-const ThemeSwitch = ({ darkMode, setDarkMode }) => {
-  const handleSwitch = () => {
-    setDarkMode(!darkMode);
-  };
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import * as actions from '../actions';
 
+const ThemeSwitch = ({ switchDarkMode, darkMode }) => {
   return (
     <div style={{ marginLeft: 'auto' }}>
       <FormGroup>
@@ -20,7 +18,7 @@ const ThemeSwitch = ({ darkMode, setDarkMode }) => {
             <Switch
               size='small'
               checked={darkMode}
-              onChange={handleSwitch}
+              onChange={() => switchDarkMode(darkMode)}
               name='checkedA'
               color='secondary'
               inputProps={{ 'aria-label': 'secondary checkbox' }}
@@ -32,4 +30,10 @@ const ThemeSwitch = ({ darkMode, setDarkMode }) => {
   );
 };
 
-export default ThemeSwitch;
+const mapStateToProps = (state) => {
+  return {
+    darkMode: state.theme.darkMode,
+  };
+};
+
+export default compose(connect(mapStateToProps, actions))(ThemeSwitch);

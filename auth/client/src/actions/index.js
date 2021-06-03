@@ -83,3 +83,16 @@ export const resetError = () => async (dispatch) => {
     });
   }
 };
+
+// THEME ACTIONS
+export const switchDarkMode = (current) => async (dispatch) => {
+  try {
+    dispatch({ type: actionTypes.SWITCH_DARKMODE });
+    Cookies.set('DARK_MODE', !current, {
+      expires: 365,
+      sameSite: 'strict',
+    });
+  } catch (err) {
+    dispatch({ type: actionTypes.THEME_ERROR_MSG });
+  }
+};

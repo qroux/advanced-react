@@ -25,18 +25,9 @@ const AppContainer = styled.div(({ myTheme }) => {
   };
 });
 
-{
-  /* <div
-style={{
-  height: '100vh',
-  backgroundColor: myTheme.palette.background.default,
-  color: myTheme.palette.text.primary,
-  boxSizing: 'border-box',
-}}> */
-}
+const App = ({ fetchToken, auth, darkMode }) => {
+  console.log('darkMode =', darkMode);
 
-const App = ({ fetchToken, auth }) => {
-  const [darkMode, setDarkMode] = useState(false);
   const palletType = darkMode ? 'dark' : 'light';
   const myTheme = createMuiTheme({
     palette: {
@@ -68,11 +59,7 @@ const App = ({ fetchToken, auth }) => {
       <ThemeProvider theme={myTheme}>
         <Suspense fallback={<Loading />}>
           <AppContainer myTheme={myTheme}>
-            <Header
-              token={auth}
-              darkMode={darkMode}
-              setDarkMode={setDarkMode}
-            />
+            <Header token={auth} />
             <Switch>{renderRoutes}</Switch>
           </AppContainer>
         </Suspense>
@@ -82,7 +69,10 @@ const App = ({ fetchToken, auth }) => {
 };
 
 const mapStateToProps = (state) => {
-  return { auth: state.auth.authenticated };
+  return {
+    auth: state.auth.authenticated,
+    darkMode: state.theme.darkMode,
+  };
 };
 
 export default compose(connect(mapStateToProps, actions))(App);

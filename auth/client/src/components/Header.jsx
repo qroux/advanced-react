@@ -4,7 +4,7 @@ import ThemeSwitch from './ThemeSwitch';
 
 import { useLocation } from 'react-router-dom';
 
-export const Header = ({ token, darkMode, setDarkMode }) => {
+export const Header = ({ token }) => {
   const location = useLocation();
 
   const buttons = [
@@ -40,7 +40,7 @@ export const Header = ({ token, darkMode, setDarkMode }) => {
         <Tabs value={location.pathname} indicatorColor='secondary'>
           {renderButtons()}
         </Tabs>
-        <ThemeSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
+        <ThemeSwitch />
       </Toolbar>
     </AppBar>
   );
