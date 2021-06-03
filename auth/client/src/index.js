@@ -11,28 +11,7 @@ import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
 
 // STYLING
-import { createGlobalStyle } from 'styled-components';
-
-const GlobalStyle = createGlobalStyle({
-  body: {
-    margin: 0,
-    padding: 0,
-    fontFamily: ['Roboto', 'sans-serif'],
-    '-webkitFont-smoothing': 'antialiased',
-    '-moz-osx-font-smoothing': 'grayscale',
-  },
-
-  code: {
-    fontFamily: [
-      'source-code-pro',
-      'Menlo',
-      'Monaco',
-      'Consolas',
-      'Courier New',
-      'monospace',
-    ],
-  },
-});
+import { CssBaseline } from '@material-ui/core';
 
 const store = createStore(
   reducers,
@@ -42,7 +21,7 @@ const store = createStore(
 ReactDOM.render(
   // <React.StrictMode>
   <Provider store={store}>
-    <GlobalStyle />
+    <CssBaseline />
     <App />
   </Provider>,
   // </React.StrictMode>,

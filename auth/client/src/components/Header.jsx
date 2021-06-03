@@ -6,7 +6,6 @@ import { useLocation } from 'react-router-dom';
 
 export const Header = ({ token, darkMode, setDarkMode }) => {
   const location = useLocation();
-  const theme = useTheme();
 
   const buttons = [
     { path: '/', label: 'Homepage', requireAuth: false, alwaysRender: true },
@@ -36,11 +35,11 @@ export const Header = ({ token, darkMode, setDarkMode }) => {
   };
 
   return (
-    <AppBar
-      position='static'
-      style={{ backgroundColor: theme.palette.primary.main }}>
+    <AppBar position='static' color='default'>
       <Toolbar variant='dense'>
-        <Tabs value={location.pathname}>{renderButtons()}</Tabs>
+        <Tabs value={location.pathname} indicatorColor='secondary'>
+          {renderButtons()}
+        </Tabs>
         <ThemeSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
       </Toolbar>
     </AppBar>

@@ -11,11 +11,11 @@ import { device } from '../helpers/device';
 const Container = styled.div`
   width: 100%;
   box-sizing: border-box;
-  opacity: 0.7;
+  opacity: 1;
 
-  &:hover {
-    opacity: 1;
-  }
+  // &:hover {
+  //   opacity: 1;
+  // }
 
   @media ${device.mobileS} {
     padding: 10vh 0;

@@ -13,14 +13,16 @@ const ThemeSwitch = ({ darkMode, setDarkMode }) => {
     <div style={{ marginLeft: 'auto' }}>
       <FormGroup>
         <FormControlLabel
-          label='Dark mode'
+          label='Dark'
           labelPlacement='start'
+          color='default'
           control={
             <Switch
               size='small'
               checked={darkMode}
               onChange={handleSwitch}
               name='checkedA'
+              color='secondary'
               inputProps={{ 'aria-label': 'secondary checkbox' }}
             />
           }

@@ -8,14 +8,12 @@ import { formType } from '../helpers/formHelper';
 import { Typography, useTheme } from '@material-ui/core';
 
 const Login = (props) => {
-  const theme = useTheme();
-
   return (
     <div>
-      <Typography variant='h4' style={{ color: theme.palette.secondary.main }}>
+      <Typography variant='h4' color='textPrimary'>
         Login Page
       </Typography>
-      <Typography variant='body1' color='secondary'>
+      <Typography variant='body1' color='textSecondary'>
         {props.errorMessage ? props.errorMessage : null}
       </Typography>
       <Form type={formType.LOGIN} action={props.login} />

@@ -7,14 +7,12 @@ import * as actions from '../actions';
 import { Typography, useTheme } from '@material-ui/core';
 
 const SignUp = (props) => {
-  const theme = useTheme();
-
   return (
     <div>
-      <Typography variant='h4' style={{ color: theme.palette.secondary.main }}>
+      <Typography variant='h4' color='textPrimary'>
         SignUp Page
       </Typography>
-      <Typography variant='body1' color='secondary'>
+      <Typography variant='body1' color='textSecondary'>
         {props.errorMessage ? props.errorMessage : null}
       </Typography>
       <Form action={props.signup} type={formType.SIGNUP} />

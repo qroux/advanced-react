@@ -17,30 +17,30 @@ import SignUp from './pages/SignUp';
 import SignOut from './pages/Signout';
 import Feature from './pages/Feature';
 
-// const Login = lazy(() => import('./pages/Login'));
-// const SignUp = lazy(() => import('./pages/SignUp'));
-// const SignOut = lazy(() => import('./pages/Signout'));
-// const Feature = lazy(() => import('./pages/Feature'));
-
-const AppContainer = styled.div({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'flex-start',
+const AppContainer = styled.div(({ myTheme }) => {
+  return {
+    height: '100vh',
+    backgroundColor: myTheme.palette.background.default,
+    boxSizing: 'border-box',
+  };
 });
+
+{
+  /* <div
+style={{
+  height: '100vh',
+  backgroundColor: myTheme.palette.background.default,
+  color: myTheme.palette.text.primary,
+  boxSizing: 'border-box',
+}}> */
+}
 
 const App = ({ fetchToken, auth }) => {
   const [darkMode, setDarkMode] = useState(false);
   const palletType = darkMode ? 'dark' : 'light';
-  const darkTheme = createMuiTheme({
+  const myTheme = createMuiTheme({
     palette: {
       type: palletType,
-      primary: {
-        main: palletType ? '#3A1772' : '#D741A7',
-      },
-      secondary: {
-        main: palletType ? '#D741A7' : '#3A1772',
-      },
     },
   });
 
@@ -65,9 +65,9 @@ const App = ({ fetchToken, auth }) => {
   });
   return (
     <Router>
-      <ThemeProvider theme={darkTheme}>
+      <ThemeProvider theme={myTheme}>
         <Suspense fallback={<Loading />}>
-          <AppContainer>
+          <AppContainer myTheme={myTheme}>
             <Header
               token={auth}
               darkMode={darkMode}
