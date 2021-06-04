@@ -7,6 +7,7 @@ import { grantAccess } from '../helpers/grantAccess';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { device } from '../helpers/device';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Container = styled.div`
   width: 100%;
@@ -42,7 +43,15 @@ const Page = ({ children, requireAuth, auth, resetError }) => {
     history.push('/');
   }
 
-  return <Container id='page-container'>{children}</Container>;
+  return (
+    <motion.div
+      initial={{ x: -20, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.2 }}
+      exit={{ opacity: 0 }}>
+      <Container id='page-container'>{children}</Container>
+    </motion.div>
+  );
 };
 
 Page.defaultProps = {

@@ -1,5 +1,10 @@
 import { useEffect, Suspense, lazy, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useLocation,
+} from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -11,6 +16,7 @@ import Page from './components/Page';
 import { Home } from './pages/Home';
 import { Loading } from './pages/Loading';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { AnimatePresence } from 'framer-motion';
 
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
@@ -26,6 +32,7 @@ const AppContainer = styled.div(({ myTheme }) => {
 });
 
 const App = ({ fetchToken, auth, darkMode }) => {
+  const location = useLocation();
   const palletType = darkMode ? 'dark' : 'light';
   const myTheme = createMuiTheme({
     palette: {
@@ -53,16 +60,18 @@ const App = ({ fetchToken, auth, darkMode }) => {
     );
   });
   return (
-    <Router>
-      <ThemeProvider theme={myTheme}>
-        <Suspense fallback={<Loading />}>
-          <AppContainer myTheme={myTheme}>
-            <Header token={auth} />
-            <Switch>{renderRoutes}</Switch>
-          </AppContainer>
-        </Suspense>
-      </ThemeProvider>
-    </Router>
+    <ThemeProvider theme={myTheme}>
+      <Suspense fallback={<Loading />}>
+        <AppContainer myTheme={myTheme}>
+          <Header token={auth} />
+          <AnimatePresence exitBeforeEnter>
+            <Switch location={location} key={location.key}>
+              {renderRoutes}
+            </Switch>
+          </AnimatePresence>
+        </AppContainer>
+      </Suspense>
+    </ThemeProvider>
   );
 };
 

@@ -35,7 +35,7 @@ export const Header = ({ token }) => {
   };
 
   return (
-    <AppBar position='static' color='default'>
+    <AppBar position='static' color='default' elevation={1}>
       <Toolbar variant='dense'>
         <Tabs value={location.pathname} indicatorColor='secondary'>
           {renderButtons()}
