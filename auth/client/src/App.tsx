@@ -31,7 +31,7 @@ const AppContainer = styled.div(({ myTheme }) => {
   };
 });
 
-const App = ({ fetchToken, auth, darkMode }) => {
+const App = ({ fetchToken, auth, darkMode }: { darkmode: boolean }) => {
   const location = useLocation();
   const palletType = darkMode ? 'dark' : 'light';
   const myTheme = createMuiTheme({
