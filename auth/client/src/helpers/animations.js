@@ -15,13 +15,39 @@ export const animations = {
       transition: { duration: 0.3 },
     },
   },
-  cardTransition: {
+  inViewTransition: {
     hidden: {
-      x: '-100vw',
+      x: -100,
+      opacity: 0,
     },
     visible: {
       x: 0,
-      transition: { type: 'spring', bounce: 0.2, duration: 1 },
+      opacity: 1,
+      transition: { type: 'spring', bounce: 0.2, duration: 1, delay: 0.5 },
+    },
+  },
+  cardStaggerTransition: {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.5,
+      },
+    },
+  },
+  cardTransition: {
+    hidden: {
+      opacity: 0,
+      x: -50,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 1,
+      },
     },
   },
 };

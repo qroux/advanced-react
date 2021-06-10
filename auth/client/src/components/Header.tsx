@@ -28,7 +28,6 @@ export const Header = ({ token }) => {
           key={btn.path}
           label={btn.label}
           component={Link}
-          to={btn.path}
         />
       );
     });

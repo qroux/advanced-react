@@ -7,7 +7,7 @@ import { animations } from '../helpers/animations';
 
 const ItemsContainer = styled.div(() => {
   return {
-    padding: '10vh 0',
+    padding: '1vh 0',
   };
 });
 
@@ -84,23 +84,23 @@ const items = [
 
 const Feature = () => {
   const animation = useAnimation();
-  const { ref, inView, entry } = useInView({
-    /* Optional options */
-    threshold: 0.2,
-  });
+  // const { ref, inView, entry } = useInView({
+  //   /* Optional options */
+  //   threshold: 0.3,
+  // });
 
-  useEffect(() => {
-    console.log('inview =', inView);
-    if (inView) {
-      animation.start(animations.cardTransition.visible);
-    } else {
-      animation.start(animations.cardTransition.hidden);
-    }
-  }, [inView]);
+  // useEffect(() => {
+  //   console.log('inview =', inView);
+  //   if (inView) {
+  //     animation.start(animations.inViewTransition.visible);
+  //   } else {
+  //     animation.start(animations.inViewTransition.hidden);
+  //   }
+  // }, [inView]);
 
   const renderItems = items.map((item, index) => {
     return (
-      <div key={index}>
+      <motion.div variants={animations.cardTransition} key={index}>
         <Paper
           style={{ width: '100%', marginBottom: '2vh', maxWidth: '1000px' }}>
           <CardContainer>
@@ -117,7 +117,7 @@ const Feature = () => {
             </CardContent>
           </CardContainer>
         </Paper>
-      </div>
+      </motion.div>
     );
   });
 
@@ -126,24 +126,15 @@ const Feature = () => {
       <Typography variant='h4' gutterBottom color='textPrimary'>
         Feature Page
       </Typography>
-      <div
-        id='palceholder'
-        style={{
-          height: '100vh',
-          width: '60%',
-          backgroundColor: 'green',
-          marginBottom: '2vh',
-        }}
-      />
 
-      <div ref={ref} id='ici'>
-        <Typography variant='h4' gutterBottom color='textPrimary'>
-          les items
-        </Typography>
-        <motion.div animate={animation}>
-          <ItemsContainer>{renderItems}</ItemsContainer>
-        </motion.div>
-      </div>
+      {/* <div ref={ref} id='ici'> */}
+      <motion.div
+        initial='hidden'
+        animate='visible'
+        variants={animations.cardStaggerTransition}>
+        <ItemsContainer>{renderItems}</ItemsContainer>
+      </motion.div>
+      {/* </div> */}
     </div>
   );
 };
