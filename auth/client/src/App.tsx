@@ -24,9 +24,9 @@ import SignUp from './pages/SignUp';
 import SignOut from './pages/Signout';
 import Feature from './pages/Feature';
 
-const AppContainer = styled.div(({ myTheme }) => {
+const AppContainer = styled.div(({ myTheme }: { myTheme: any }) => {
   return {
-    height: '100vh',
+    minHeight: '100vh',
     backgroundColor: myTheme.palette.background.default,
     boxSizing: 'border-box',
   };

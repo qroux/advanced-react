@@ -15,12 +15,8 @@ const Container = styled.div`
   box-sizing: border-box;
   opacity: 1;
 
-  // &:hover {
-  //   opacity: 1;
-  // }
-
   @media ${device.mobileS} {
-    padding: 10vh 0;
+    padding: 3vh 1vh;
     display: flex;
     justify-content: center;
   }
@@ -28,6 +24,8 @@ const Container = styled.div`
   @media ${device.laptop} {
     padding: 10vh;
     display: flex;
+    flex-direction: column;
+    flex-grow: 1;
     justify-content: flex-start;
   }
 `;
