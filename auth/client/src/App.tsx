@@ -6,6 +6,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 
+import { ReduxState, StateToProps } from './interfaces/ReduxState.interface';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import * as actions from './actions';
@@ -31,7 +32,13 @@ const AppContainer = styled.div(({ myTheme }) => {
   };
 });
 
-const App = ({ fetchToken, auth, darkMode }: { darkmode: boolean }) => {
+const App = ({
+  fetchToken,
+  auth,
+  darkMode = false,
+}: {
+  darkmode?: boolean;
+}) => {
   const location = useLocation();
   const palletType = darkMode ? 'dark' : 'light';
   const myTheme = createMuiTheme({
@@ -75,7 +82,7 @@ const App = ({ fetchToken, auth, darkMode }: { darkmode: boolean }) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: ReduxState): StateToProps => {
   return {
     auth: state.auth.authenticated,
     darkMode: state.theme.darkMode,
